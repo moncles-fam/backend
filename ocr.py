@@ -3,12 +3,14 @@ import uuid
 import time
 import json
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class OCR:
     def __init__(self):
-        self.api_url = os.environ['OCR_URL']
-        self.secret_key = os.environ['OCR_API_KEY']
+        self.api_url = os.getenv('OCR_URL')
+        self.secret_key = os.getenv('OCR_API_KEY')
 
     def ocr(self, img_path) -> str :
 

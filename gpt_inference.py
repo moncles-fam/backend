@@ -3,6 +3,9 @@ import openai
 import os
 import pandas as pd
 import json
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class gpt:
     def __init__(self):
@@ -10,7 +13,7 @@ class gpt:
             pass
         else:
             os.makedirs('csv_folder')
-        openai.api_key = os.environ['OPENAI_API_KEY']
+        openai.api_key = os.getenv('OPENAI_API_KEY')
 
 # -1:초기화, 0:프레임, 1:공익, 2:정치 3:기타 4: 식별불가
     def classify_text(self, text):
@@ -40,16 +43,16 @@ class gpt:
         korean_list = []
         if 'Class 1' in responsed_text:
             class_list.append(1) #공익
-            korean_list.append('공익')
+            korean_list.append('public')
         elif 'Class 2' in responsed_text:
             class_list.append(2)#정치
-            korean_list.append('정치')
+            korean_list.append('politic')
         elif 'Class 3' in responsed_text:
             class_list.append(3) #기타
-            korean_list.append('기타')
+            korean_list.append('etc')
         else:
             class_list.append(4) #식별불가
-            korean_list.append('식별불가')
+            korean_list.append('none')
 
         categories['class'] = class_list
 
@@ -63,6 +66,8 @@ class gpt:
         json_object = {'answer': korean_list[0],
                        'reason' : responsed_text}
         json_string = json.dumps(json_object)
+
+        print(json_string)
 
         return json_string
     
