@@ -5,6 +5,7 @@ import os,sys
 import matplotlib.pyplot as plt
 from glob import glob
 import datetime
+import requests
 
 class ImageCrop:
     def __init__(self):
@@ -18,6 +19,13 @@ class ImageCrop:
             pass
         else:
             os.makedirs('images')
+            img_url = 'https://t1.daumcdn.net/thumb/R720x0.fpng/?fname=http://t1.daumcdn.net/brunch/service/user/44wc/image/SzYLIUNyxKMzmC62yFvDkXPBQoY.png'
+            save_path = './images/{}.jpg'.format(datetime.datetime.now().strftime('%y%m%d_%H%M%S'))
+
+            img = requests.get(img_url)
+
+            with open(save_path, 'wb') as photo:
+                photo.write(img.content)
 
         self.imgs = os.listdir('./images')
         self.imgs = [i for i in self.imgs if i.endswith('.jpg')]

@@ -27,6 +27,7 @@ def execute():
     text = img_ocr.ocr(img_path)
     answer = gpt_infer.classify_text(text)
 
+    
     # print(json.loads(answer))
 
     return answer

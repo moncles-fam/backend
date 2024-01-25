@@ -45,5 +45,5 @@ class OCR:
         text = ''
         for i in result['images'][0]['fields']:
             text += ' '+i['inferText']
-
+        
         return text

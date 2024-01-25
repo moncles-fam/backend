@@ -63,7 +63,8 @@ class gpt:
         else:
             df.to_csv('./csv_folder/result.csv', index=False, mode='a', encoding='utf-8', header=False)
 
-        json_object = {'answer': korean_list[0],
+        json_object = {'text': text,
+                       'answer': korean_list[0],
                        'reason' : responsed_text}
         json_string = json.dumps(json_object)
 
